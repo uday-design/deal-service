@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deal-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deal-service
+  template:
+    metadata:
+      labels:
+        app: deal-service
+    spec:
+      containers:
+        - name: deal-service
+          image: deal-service:1.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MONGODB_HOST
+              value: 172.21.112.1
+            - name: KAFKA_HOST
+              value: 172.21.112.1
+          imagePullPolicy: Always
